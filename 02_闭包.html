@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_闭包</title>
+</head>
+
+<body>
+    <script>
+        /*   function outer() {
+              const a = 1;
+              function inner() {
+                  console.log(a);
+              }
+              inner();
+          }
+          outer(); */
+        /*  function outer() {
+             const a = 10;
+             function inner() {
+                 console.log(a);
+             }
+             // 返回外部函数中内部函数 inner
+             return inner;
+         }
+         const a = outer();
+         a(); // 外部调用 inner(),访问函数内变量 */
+
+        // 闭包的应用
+
+        // 不使用闭包
+        /*  let i = 0; // 全局作用域的变量容易被修改
+         function counter(){
+             i++;
+         } */
+        // 使用闭包
+        /**
+         * 注意：此时 i 虽然是 函数内的局部变量，但是但函数执行完后
+           i 并不会被回收。
+           因为 counter返回 fun的引用，f 指向了 fun，fun中的 i 可以被“找到”，不会被回收
+         */
+        function counter() {
+            let i = 0;
+            function fun() {
+                i++
+                console.log(`函数被调用了${i}次`);
+            }
+            return fun;
+        }
+        const f = counter();
+
+    </script>
+</body>
+
+</html>
