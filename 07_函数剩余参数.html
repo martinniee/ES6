@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07_函数剩余参数</title>
+</head>
+
+<body>
+    <script>
+        function getSum(a, ...rest) {
+            // rest 是真数组，可接受所有剩余的参数
+            console.log("rest: ", rest);
+            let sum = 0;
+            for (let index = 0; index < rest.length; index++) {
+                sum += rest[index];
+
+            }
+            console.log("sum: ", sum);
+        }
+        getSum(1, 2, 3); // 剩余此参数是 [2,3]
+        getSum(1, 2, 3, 4, 5); // 剩余此参数是 [2,3,4,5]
+    </script>
+</body>
+
+</html>

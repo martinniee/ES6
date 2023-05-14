@@ -303,3 +303,76 @@ var fun2 = function () {
 */
 ```
 
+
+
+## 函数参数和展开运算符
+
+函数参数类型
+
+- 动态参数
+- 剩余参数
+
+1，动态参数
+
+- 特点：arguments 是伪数组，仅存在函数中，可以获取传给函数的所有实参
+
+```javascript
+function getSum() {
+    // arguments 伪数组，仅存在函数中，可以获取传给函数的所有实参
+    console.log(arguments);
+    let sum = 0;
+    for (let i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
+    }
+    console.log("sum: ", sum); // sum: 15
+}
+getSum(1, 2, 3, 4, 5); 
+```
+
+2,剩余参数
+
+- 特点：rest 是真数组，可接受所有剩余的参数。剩余参数可以随意命名。
+
+```javascript
+function getSum(a, ...rest) {
+    // rest 是真数组，可接受所有剩余的参数
+    console.log("rest: ", rest);
+    let sum = 0;
+    for (let index = 0; index < rest.length; index++) {
+        sum += rest[index];
+
+    }
+    console.log("sum: ", sum); // sum: 15
+}
+getSum(1, 2, 3); // 剩余此参数是 [2,3]
+getSum(1, 2, 3, 4, 5); // 剩余此参数是 [2,3,4,5]
+```
+
+3，扩展：展开运算符
+
+特点：不会修改原有数组。
+
+展开运算符经常用于 求数组元素 **最大值/最小值** 或 **合并数组** 的需求中，在形参数中使用展开运算符。
+
+```javascript
+const arr = [1, 2, 3];
+console.log(...arr); // 1 2 3
+// 1. 求数组元素最大值,最小值
+const maxValue = Math.max(...arr);
+const minValue = Math.min(...arr);
+console.log("maxValue: ", maxValue); // maxValue:  3
+console.log("minValue: ", minValue); // minValue:  1
+// 2. 合并数组
+const arr2 = [3, 4, 5];
+const arr3 = [...arr, ...arr2];
+console.log("arr3: ", arr3);  //  [1, 2, 3, 3, 4, 5]
+```
+
+
+
+
+
+
+
+
+
