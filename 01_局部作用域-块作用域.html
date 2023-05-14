@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_局部作用域-块作用域.html</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+
+<body>
+    <script>
+        /* for (var i = 0; i < 10; i++) {
+            // {} 内部成为 块作用域
+            console.log(i);
+        } */
+        /*  for (let i = 0; i < 10; i++) {
+             // {} 内部成为 块作用域, i 是局部变量，外部不能访问
+             // console.log(i);
+         } */
+        if (true) {
+            let i = 10
+        }
+        console.log(i); //  Uncaught ReferenceError: i is not defined
+    </script>
+</body>
+
+</html>
