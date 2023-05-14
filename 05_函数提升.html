@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05_函数提升</title>
+</head>
+
+<body>
+    <script>
+
+        // 1. 函数提升：只提升函数声明，不提升调用
+        fun(); // 在函数声明前调用函数
+        function fun() {
+            console.log("函数被调用了");
+        }
+        /**
+          同理上述的代码相当于
+            function fun() {
+                console.log("函数被调用了");
+            }
+
+            fun(); // 在函数声明前调用函数
+            function fun() {
+                console.log("函数被调用了");
+            }
+        }
+         */
+        // 函数表达式
+        fun2();
+        var fun2 = function () {
+            console.log("函数表达式"); //Uncaught TypeError: fun2 is not a function
+        }
+        /*
+            上述的代码由于是 函数表达式，存在 变量的提升，
+            因此相当于在 fun2赋值之前调用fun2(),此时fun2 为 undifiend，因此 fun2 不是函数
+         */
+    </script>
+</body>
+
+</html>

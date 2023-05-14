@@ -12,6 +12,12 @@
    - JS 垃圾回收机制
    - 闭包
    - 变量提升
+2. 函数进阶
+   - 函数提升
+   - 函数参数
+   - 箭头函数
+3. 解构赋值
+4. 综合案例
 
 ## 作用域和作用域链
 
@@ -226,3 +232,74 @@ function counter() {
 }
 const f = counter();
 ```
+
+---
+
+## 变量提升和函数提升
+
+### 变量提升
+
+变量提升是 avaScript 中比较“奇怪”的现象，它允许在变量声明之前即被访问(仅存在于 var 声明变量)
+
+- 变量在未声明即被访问时会报语法错误。
+- 在使用`var`,`let`,`const`中，只有使用`var`声明的变量存在变量提升。变量在`var`声明之前即被访问，变量的值为`undefined`（相当于只提升变量的声明，不提升赋值）。
+- 变量提升出现在相同作用域中。
+- 实际开发中推荐先声明，后访问。
+
+```javascript
+// 1. 变量提升：把所有var 声明的变量的声明提到 【当前作用域】的最前面
+console.log(num, " 件"); // undefined 件
+var num = 10;
+// 上述代码相当于
+/**
+        var num;
+        console.log(num, "件"); // 因此num声明但位赋值，默认值为 undefined
+        num = 10;
+        */
+function fun() {
+	console.log(num, " 件"); // undefined 件
+	var num = 10;
+}
+fun();
+```
+
+### 函数提升
+
+两种情况
+
+- 普通函数的函数提升
+- 函数表达式的函数变量的提升
+
+普通函数的函数提升
+
+```javascript
+// 1. 函数提升：只提升函数声明，不提升调用
+fun(); // 在函数声明前调用函数
+function fun() {
+    console.log("函数被调用了");
+}
+/**
+上述的代码相当于
+
+function fun() {
+     console.log("函数被调用了");
+}
+
+fun(); // 在函数声明前调用函数
+*/
+```
+
+函数表达式的函数变量的提升
+
+```javascript
+// 函数表达式
+fun2();
+var fun2 = function () {
+	console.log("函数表达式"); //Uncaught TypeError: fun2 is not a function
+}
+/*
+上述的代码由于是 函数表达式，存在 变量的提升，
+因此相当于在 fun2赋值之前调用fun2(),此时fun2 为 undifiend，因此 fun2 不是函数，会报错
+*/
+```
+

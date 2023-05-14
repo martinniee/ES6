@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04_变量提升.html</title>
+</head>
+
+<body>
+    <script>
+        // 1. 变量提升：把所有var 声明的变量的声明提到 【当前作用域】的最前面
+        console.log(num, " 件"); // undefined 件
+        var num = 10;
+        // 上述代码相当于
+        /**
+            var num;
+            console.log(num, "件"); // 因此num声明但位赋值，默认值为 undefined
+            num = 10;
+         */
+        function fun() {
+            console.log(num, " 件"); // undefined 件
+            var num = 10;
+        }
+        fun(); // 
+    </script>
+</body>
+
+</html>
