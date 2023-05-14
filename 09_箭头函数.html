@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_箭头函数</title>
+</head>
+
+<body>
+    <script>
+        // 普通函数
+        const fn = function () { console.log("普通函数"); }
+        // 1. 箭头函数：一般形式
+        // 箭头函数属于表达式函数，因此不存在 函数提升
+        const fn2 = (a, b, c) => { console.log("箭头函数"); }
+        // 3. 箭头函数：形参只有一个，则可省略参数 '()'
+        const fn3 = a => { console.log("a:", a); }
+        // 4. 箭头函数：函数体只有一个语句，则可省略 '{}'
+        const fn4 = b => console.log("b:", b);
+        // 5. 箭头函数：函数体只有一个语句，且是 return 返回语句，则可以省略 return ,省略 '{}'
+        const fn5 = c => c++;
+        // 6. 箭头函数：返回值可以是一个对象
+        const fn6 = (name) => ({ username: name });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11_箭头函数this</title>
+</head>
+
+<body>
+    <script>
+        // -----------------1. 普通函数的 this-----------------
+        console.log("this的指向", this); // window
+        function fn() {
+            console.log("this的指向", this); // window
+        }
+        windows.fn();
+        const obj = {
+            name: 'foo',
+            sayHi: function () {
+                console.log("this的指向", this); // obj
+            }
+        }
+        obj.sayHi();
+        // -----------------2. 箭头函数的 this-----------------
+        const fn1 = () => {
+            // 箭头函数的 this 指向上一层作用域的 this
+            console.log("this的指向", this); // window
+        }
+        fn1();
+        // 对象方法的箭头函数
+        const obj2 = {
+            name: 'foo',
+            sayHi: () => {
+                // 箭头函数的 this 指向上一层作用域的 this
+                console.log("this的指向", this); // window
+            }
+        }
+        obj2.sayHi();
+        // 对象方法的箭头函数
+        const obj3 = {
+            name: 'foo',
+            sayHi: function () {
+                let i = 10;
+                // 当前作用域的 this 是 obj3
+                const cont = () => {
+                    // 箭头函数的 this 指向上一层作用域的 this
+                    console.log("this的指向", this); // obj3
+                }
+            }
+        }
+        obj3.sayHi();
+    </script>
+</body>
+
+</html>

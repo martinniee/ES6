@@ -368,11 +368,97 @@ const arr3 = [...arr, ...arr2];
 console.log("arr3: ", arr3);  //  [1, 2, 3, 3, 4, 5]
 ```
 
+---
 
 
 
+## ES6箭头函数的使用
 
+目的：引入箭头函数的目的是更简短的函数写法并且不绑定`this`，箭头函数的语法比函数表达式更简洁
+使用场景：箭头函数更适用于那些**本来需要匿名函数**的地方
 
+### 箭头函数的基本使用
 
+```javascript
+// 普通函数
+const fn = function () { console.log("普通函数"); }
+// 1. 箭头函数：一般形式
+// 箭头函数属于表达式函数，因此不存在 函数提升
+const fn2 = (a, b, c) => { console.log("箭头函数"); }
+// 3. 箭头函数：形参只有一个，则可省略参数 '()'
+const fn3 = a => { console.log("a:", a); }
+// 4. 箭头函数：函数体只有一个语句，则可省略 '{}'
+const fn4 = b => console.log("b:", b);
+// 5. 箭头函数：函数体只有一个语句，且是 return 返回语句，则可以省略 return ,省略 '{}'
+const fn5 = c => c++;
+// 6. 箭头函数：返回值可以是一个对象
+const fn6 = (name) => ({ username: name });
+```
 
+### 箭头函数的参数
+
+箭头函数中没有 `arguments `，只有 剩余参数` ...rest`
+
+```javascript
+// 利用箭头函数求和
+// 箭头函数中没有 arguments ，只有 剩余参数 ...rest
+const getSum = (...rest) => {
+    let sum = 0;
+    for (let index = 0; index < rest.length; index++) {
+        sum += rest[index];
+    }
+    console.log("sum: ", sum); // sum:  87
+}
+getSum(1, 1, 2, 3, 5, 8, 13, 21, 33)
+```
+
+### 箭头函数this
+
+箭头函数**不会创建自己的this**,它只会从**自己的作用域链的上一层**沿用thiS。
+
+在开发中 **使用箭头函数前需要考虑函数中this的值** ，事件回调函数使用箭头函数时，`this`为全局的`window`,因此 `DOM`事件回调函数为了简便，**还是不太推荐使用箭头函数**
+
+```javascript
+// -----------------1. 普通函数的 this-----------------
+console.log(this); // window
+function fn() {
+    console.log(this); // window
+}
+windows.fn();
+const obj = {
+    name: 'foo',
+    sayHi: function () {
+        console.log(this); // obj
+    }
+}
+obj.sayHi();
+// -----------------2. 箭头函数的 this-----------------
+const fn1 = () => {
+    // 箭头函数的 this 指向上一层作用域的 this
+    console.log(this); // window
+}
+fn1();
+// 对象方法的箭头函数
+const obj2 = {
+    name: 'foo',
+    sayHi: () => {
+        // 箭头函数的 this 指向上一层作用域的 this
+        console.log(this); // window
+    }
+}
+obj2.sayHi();
+// 对象方法的箭头函数
+const obj3 = {
+    name: 'foo',
+    sayHi: function () {
+        let i = 10;
+        // 当前作用域的 this 是 obj3
+        const cont = () => {
+            // 箭头函数的 this 指向上一层作用域的 this
+            console.log(this); // obj3
+        }
+        }
+}
+obj3.sayHi();
+```
 

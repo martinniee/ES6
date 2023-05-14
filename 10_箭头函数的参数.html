@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_箭头函数的参数</title>
+</head>
+
+<body>
+    <script>
+        // 1. 利用箭头函数求和
+        // 箭头函数中没有 arguments ，只有 剩余参数 ...rest
+        const getSum = (...rest) => {
+            let sum = 0;
+            for (let index = 0; index < rest.length; index++) {
+                sum += rest[index];
+
+            }
+            console.log("sum: ", sum); // sum:  87
+        }
+        getSum(1, 1, 2, 3, 5, 8, 13, 21, 33)
+    </script>
+</body>
+
+</html>
