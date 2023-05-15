@@ -276,7 +276,7 @@ fun();
 // 1. 函数提升：只提升函数声明，不提升调用
 fun(); // 在函数声明前调用函数
 function fun() {
-    console.log("函数被调用了");
+	console.log("函数被调用了");
 }
 /**
 上述的代码相当于
@@ -296,14 +296,12 @@ fun(); // 在函数声明前调用函数
 fun2();
 var fun2 = function () {
 	console.log("函数表达式"); //Uncaught TypeError: fun2 is not a function
-}
+};
 /*
 上述的代码由于是 函数表达式，存在 变量的提升，
 因此相当于在 fun2赋值之前调用fun2(),此时fun2 为 undifiend，因此 fun2 不是函数，会报错
 */
 ```
-
-
 
 ## 函数参数和展开运算符
 
@@ -318,15 +316,15 @@ var fun2 = function () {
 
 ```javascript
 function getSum() {
-    // arguments 伪数组，仅存在函数中，可以获取传给函数的所有实参
-    console.log(arguments);
-    let sum = 0;
-    for (let i = 0; i < arguments.length; i++) {
-        sum += arguments[i];
-    }
-    console.log("sum: ", sum); // sum: 15
+	// arguments 伪数组，仅存在函数中，可以获取传给函数的所有实参
+	console.log(arguments);
+	let sum = 0;
+	for (let i = 0; i < arguments.length; i++) {
+		sum += arguments[i];
+	}
+	console.log("sum: ", sum); // sum: 15
 }
-getSum(1, 2, 3, 4, 5); 
+getSum(1, 2, 3, 4, 5);
 ```
 
 2,剩余参数
@@ -335,14 +333,13 @@ getSum(1, 2, 3, 4, 5);
 
 ```javascript
 function getSum(a, ...rest) {
-    // rest 是真数组，可接受所有剩余的参数
-    console.log("rest: ", rest);
-    let sum = 0;
-    for (let index = 0; index < rest.length; index++) {
-        sum += rest[index];
-
-    }
-    console.log("sum: ", sum); // sum: 15
+	// rest 是真数组，可接受所有剩余的参数
+	console.log("rest: ", rest);
+	let sum = 0;
+	for (let index = 0; index < rest.length; index++) {
+		sum += rest[index];
+	}
+	console.log("sum: ", sum); // sum: 15
 }
 getSum(1, 2, 3); // 剩余此参数是 [2,3]
 getSum(1, 2, 3, 4, 5); // 剩余此参数是 [2,3,4,5]
@@ -365,14 +362,12 @@ console.log("minValue: ", minValue); // minValue:  1
 // 2. 合并数组
 const arr2 = [3, 4, 5];
 const arr3 = [...arr, ...arr2];
-console.log("arr3: ", arr3);  //  [1, 2, 3, 3, 4, 5]
+console.log("arr3: ", arr3); //  [1, 2, 3, 3, 4, 5]
 ```
 
 ---
 
-
-
-## ES6箭头函数的使用
+## ES6 箭头函数的使用
 
 目的：引入箭头函数的目的是更简短的函数写法并且不绑定`this`，箭头函数的语法比函数表达式更简洁
 使用场景：箭头函数更适用于那些**本来需要匿名函数**的地方
@@ -381,16 +376,22 @@ console.log("arr3: ", arr3);  //  [1, 2, 3, 3, 4, 5]
 
 ```javascript
 // 普通函数
-const fn = function () { console.log("普通函数"); }
+const fn = function () {
+	console.log("普通函数");
+};
 // 1. 箭头函数：一般形式
 // 箭头函数属于表达式函数，因此不存在 函数提升
-const fn2 = (a, b, c) => { console.log("箭头函数"); }
+const fn2 = (a, b, c) => {
+	console.log("箭头函数");
+};
 // 3. 箭头函数：形参只有一个，则可省略参数 '()'
-const fn3 = a => { console.log("a:", a); }
+const fn3 = (a) => {
+	console.log("a:", a);
+};
 // 4. 箭头函数：函数体只有一个语句，则可省略 '{}'
-const fn4 = b => console.log("b:", b);
+const fn4 = (b) => console.log("b:", b);
 // 5. 箭头函数：函数体只有一个语句，且是 return 返回语句，则可以省略 return ,省略 '{}'
-const fn5 = c => c++;
+const fn5 = (c) => c++;
 // 6. 箭头函数：返回值可以是一个对象
 const fn6 = (name) => ({ username: name });
 ```
@@ -403,66 +404,64 @@ const fn6 = (name) => ({ username: name });
 // 利用箭头函数求和
 // 箭头函数中没有 arguments ，只有 剩余参数 ...rest
 const getSum = (...rest) => {
-    let sum = 0;
-    for (let index = 0; index < rest.length; index++) {
-        sum += rest[index];
-    }
-    console.log("sum: ", sum); // sum:  87
-}
-getSum(1, 1, 2, 3, 5, 8, 13, 21, 33)
+	let sum = 0;
+	for (let index = 0; index < rest.length; index++) {
+		sum += rest[index];
+	}
+	console.log("sum: ", sum); // sum:  87
+};
+getSum(1, 1, 2, 3, 5, 8, 13, 21, 33);
 ```
 
-### 箭头函数this
+### 箭头函数 this
 
-箭头函数**不会创建自己的this**,它只会从**自己的作用域链的上一层**沿用thiS。
+箭头函数**不会创建自己的 this**,它只会从**自己的作用域链的上一层**沿用 thiS。
 
-在开发中 **使用箭头函数前需要考虑函数中this的值** ，事件回调函数使用箭头函数时，`this`为全局的`window`,因此 `DOM`事件回调函数为了简便，**还是不太推荐使用箭头函数**
+在开发中 **使用箭头函数前需要考虑函数中 this 的值** ，事件回调函数使用箭头函数时，`this`为全局的`window`,因此 `DOM`事件回调函数为了简便，**还是不太推荐使用箭头函数**
 
 ```javascript
 // -----------------1. 普通函数的 this-----------------
 console.log(this); // window
 function fn() {
-    console.log(this); // window
+	console.log(this); // window
 }
 windows.fn();
 const obj = {
-    name: 'foo',
-    sayHi: function () {
-        console.log(this); // obj
-    }
-}
+	name: "foo",
+	sayHi: function () {
+		console.log(this); // obj
+	},
+};
 obj.sayHi();
 // -----------------2. 箭头函数的 this-----------------
 const fn1 = () => {
-    // 箭头函数的 this 指向上一层作用域的 this
-    console.log(this); // window
-}
+	// 箭头函数的 this 指向上一层作用域的 this
+	console.log(this); // window
+};
 fn1();
 // 对象方法的箭头函数
 const obj2 = {
-    name: 'foo',
-    sayHi: () => {
-        // 箭头函数的 this 指向上一层作用域的 this
-        console.log(this); // window
-    }
-}
+	name: "foo",
+	sayHi: () => {
+		// 箭头函数的 this 指向上一层作用域的 this
+		console.log(this); // window
+	},
+};
 obj2.sayHi();
 // 对象方法的箭头函数
 const obj3 = {
-    name: 'foo',
-    sayHi: function () {
-        let i = 10;
-        // 当前作用域的 this 是 obj3
-        const cont = () => {
-            // 箭头函数的 this 指向上一层作用域的 this
-            console.log(this); // obj3
-        }
-    }
-}
+	name: "foo",
+	sayHi: function () {
+		let i = 10;
+		// 当前作用域的 this 是 obj3
+		const cont = () => {
+			// 箭头函数的 this 指向上一层作用域的 this
+			console.log(this); // obj3
+		};
+	},
+};
 obj3.sayHi();
 ```
-
-
 
 ## 解构赋值
 
@@ -494,16 +493,17 @@ console.log(`a是${a},b是${b}`); // a是2,b是1
 2，⚠️ 必须加分号的两种情况
 
 ```javascript
-// 1. 立即执行函数需要添加 ';' 
-(function () { })();
+// 1. 立即执行函数需要添加 ';'
+(function () {})();
 
 // 2. 使用数组的时候
 // const arr = [1, 2, 3];
-const str = 'foo'
-// const str = 'foo'; // 使用封号
-[1, 2, 3].map(function (item) {
+const str = "foo"[
+	// const str = 'foo'; // 使用封号
+	(1, 2, 3)
+].map(function (item) {
 	console.log("item:", item); // Uncaught TypeError: Cannot read properties of undefined (reading 'map')
-})
+});
 /*
     如果上述代码 const str = 'foo' 后 无 ';'，则代码解析会成为
     const str = foo[1,2,3],map...  这样的结构，而没有 foo[1,2,3] 这样的数组，因此没有
@@ -521,7 +521,7 @@ console.log(a, b, c, d); // 1 2 3 undefined
 // 2. 赋值元素数量 小于 解构元素数量，则有多余的
 // 3. 使用剩余参数接收剩余的值
 const [x, y, ...rest] = [4, 5, 6, 7];
-console.log("x, y: ", x, y);    // x, y:  4 5
+console.log("x, y: ", x, y); // x, y:  4 5
 console.log("rest: ", ...rest); // rest:  6 7
 
 // 4. 为了防止因 出现（1）的情况，可以给赋值元素设置 默认值
@@ -533,8 +533,8 @@ console.log("q ", q); // q  40
 // 5. 按需导入（赋值)解构元素
 // 比如下面的 l 不是 '3' 而是 '4' ，因为空出了一个元素
 const [h, j, , l] = [1, 2, 3, 4];
-console.log('h,j: ', h, j); // h,j:  1 2
-console.log('l: ', l); // l:  4
+console.log("h,j: ", h, j); // h,j:  1 2
+console.log("l: ", l); // l:  4
 
 // 6. 支持 多维数组 的数组解构
 const arr = [1, 2, [3, 4]];
@@ -550,10 +550,7 @@ console.log("u,v: ", u, v); // u,v:  3 4
     const [k,r,[s,t]] = arr 
     k为1,r为2,s为3,t为4
 */
-
 ```
-
-
 
 ### 对象解构
 
@@ -561,31 +558,32 @@ console.log("u,v: ", u, v); // u,v:  3 4
 
 ```javascript
 // 1. 直接解构赋值给同名属性变量
-const { name, age } = { name: 'foo', age: 18 };
+const { name, age } = { name: "foo", age: 18 };
 console.log("name: ", name, "age: ", age); // name:  foo age:  18
 
 // 2. 赋值非同属姓名变量
-const { name: uname, age: uage } = { name: 'bar', age: 20 };
+const { name: uname, age: uage } = { name: "bar", age: 20 };
 console.log("uname: ", uname, ",uage: ", uage); // uname:  bar ，uage:  20
 
 // 3. 解构数组对象（数组元素是对象）
-const pig = [
-    { uname: 'peiqi', uage: 15 }];
+const pig = [{ uname: "peiqi", uage: 15 }];
 
 const [{ uname: name2, uage: age2 }] = pig;
 console.log("name2: ", name2, ",age2: ", age2); // nname2:  peiqi ,age2:  15
 
 // 4. 多级对象解构
 const pigs = {
-    name: 'peipi',
-    family: {
-        mother: 'mompig',
-        father: 'pappig',
-        brother: 'George',
-    },
-    age: 6
-}
-const { family: { brother } } = pigs;
+	name: "peipi",
+	family: {
+		mother: "mompig",
+		father: "pappig",
+		brother: "George",
+	},
+	age: 6,
+};
+const {
+	family: { brother },
+} = pigs;
 console.log("brother: ", brother); // brother:  George
 ```
 
@@ -593,18 +591,16 @@ console.log("brother: ", brother); // brother:  George
 
 - 作为函数形参解构
 
-
-
-## foreach遍历数组
+## foreach 遍历数组
 
 遍历数组的方法除了有`map`，可以用 `foreach`。相比`map`，`foreach`不会返回数组，使用上类似。
 
 ```javascript
 // 使用foreach遍历数组
-const arr = ['red', 'green', 'blue'];
+const arr = ["red", "green", "blue"];
 const result = arr.forEach((item, index) => {
-    console.log("item: ", item, "index: ", index);
-})
+	console.log("item: ", item, "index: ", index);
+});
 /*
          item:  red index:  0
          item:  green index:  1
@@ -612,17 +608,11 @@ const result = arr.forEach((item, index) => {
 */
 ```
 
-
-
 ## 渲染商品案例
 
 https://www.bilibili.com/video/BV1VL411h72F/?p=11&spm_id_from=pageDriver&vd_source=bc02b194f06ee6c081a8d33ad7b3824d
 
-
-
 ## 综合案例-筛选商品案例
-
-
 
 数组的`filter()`方法的简单使用
 
@@ -631,18 +621,11 @@ https://www.bilibili.com/video/BV1VL411h72F/?p=11&spm_id_from=pageDriver&vd_sour
 ```javascript
 const arr = [10, 20, 30, 40];
 const result = arr.filter(function (item, index) {
-    return item > 10;
-})
+	return item > 10;
+});
 console.log("result: ", result); // result:  [20, 30, 40]
 ```
 
+代码：https://github.com/martinniee/ES6/blob/main/Day02/20_%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html
 
-
-代码：
-
-
-
-
-
-
-
+预览：https://htmlpreview.github.io/?https://github.com/martinniee/ES6/blob/main/Day02/20_%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html
