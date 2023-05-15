@@ -620,9 +620,25 @@ https://www.bilibili.com/video/BV1VL411h72F/?p=11&spm_id_from=pageDriver&vd_sour
 
 
 
-## 综合案例
+## 综合案例-筛选商品案例
 
 
+
+数组的`filter()`方法的简单使用
+
+特点：将原数组中满足条件的元素放到新数组中，不改变原数组。
+
+```javascript
+const arr = [10, 20, 30, 40];
+const result = arr.filter(function (item, index) {
+    return item > 10;
+})
+console.log("result: ", result); // result:  [20, 30, 40]
+```
+
+
+
+代码：
 
 
 
