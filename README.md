@@ -593,3 +593,28 @@ console.log("brother: ", brother); // brother:  George
 
 - 作为函数形参解构
 
+
+
+## foreach遍历数组
+
+遍历数组的方法除了有`map`，可以用 `foreach`。相比`map`，`foreach`不会返回数组，使用上类似。
+
+```javascript
+// 使用foreach遍历数组
+const arr = ['red', 'green', 'blue'];
+const result = arr.forEach((item, index) => {
+    console.log("item: ", item, "index: ", index);
+})
+/*
+         item:  red index:  0
+         item:  green index:  1
+         item:  blue index:  2
+*/
+```
+
+
+
+
+
+
+
