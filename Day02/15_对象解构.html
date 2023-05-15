@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15_对象解构</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+
+<body>
+    <script>
+        // 1. 直接解构赋值给同名属性变量
+        const { name, age } = { name: 'foo', age: 18 };
+        console.log("name: ", name, "age: ", age); // name:  foo age:  18
+        // 2. 赋值非同属姓名变量
+        const { name: uname, age: uage } = { name: 'bar', age: 20 };
+        console.log("uname: ", uname, ",uage: ", uage); // uname:  bar ，uage:  20
+        // 3. 解构数组对象（数组元素是对象）
+        const pig = [
+            { uname: 'peiqi', uage: 15 }];
+
+        const [{ uname: name2, uage: age2 }] = pig;
+        console.log("name2: ", name2, ",age2: ", age2); // nname2:  peiqi ,age2:  15
+    </script>
+</body>
+
+</html>

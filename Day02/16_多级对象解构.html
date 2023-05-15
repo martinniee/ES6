@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16_多级对象解构</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+
+<body>
+    <script>
+        // 4. 多级对象解构
+        const pigs = {
+            name: 'peipi',
+            family: {
+                mother: 'mompig',
+                father: 'pappig',
+                brother: 'George',
+            },
+            age: 6
+        }
+        const { family: { brother } } = pigs;
+        console.log("brother: ", brother); // brother:  George
+    </script>
+</body>
+
+</html>

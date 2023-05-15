@@ -555,6 +555,41 @@ console.log("u,v: ", u, v); // u,v:  3 4
 
 
 
-
-
 ### 对象解构
+
+对象解构是将**对象属性**和**方法**快速批量赋值给一系列变量的简洁语法
+
+```javascript
+// 1. 直接解构赋值给同名属性变量
+const { name, age } = { name: 'foo', age: 18 };
+console.log("name: ", name, "age: ", age); // name:  foo age:  18
+
+// 2. 赋值非同属姓名变量
+const { name: uname, age: uage } = { name: 'bar', age: 20 };
+console.log("uname: ", uname, ",uage: ", uage); // uname:  bar ，uage:  20
+
+// 3. 解构数组对象（数组元素是对象）
+const pig = [
+    { uname: 'peiqi', uage: 15 }];
+
+const [{ uname: name2, uage: age2 }] = pig;
+console.log("name2: ", name2, ",age2: ", age2); // nname2:  peiqi ,age2:  15
+
+// 4. 多级对象解构
+const pigs = {
+    name: 'peipi',
+    family: {
+        mother: 'mompig',
+        father: 'pappig',
+        brother: 'George',
+    },
+    age: 6
+}
+const { family: { brother } } = pigs;
+console.log("brother: ", brother); // brother:  George
+```
+
+对象解构的其他使用
+
+- 作为函数形参解构
+
