@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14_数组解构细节</title>
+</head>
+
+<body>
+    <script>
+        // 1. 赋值元素数量 大于 解构元素数量，则未赋值元素值为 undefine
+        const [a, b, c, d] = [1, 2, 3];
+        console.log(a, b, c, d); // 1 2 3 undefined
+        // 2. 赋值元素数量 小于 解构元素数量，则有多余的
+        // 3. 使用剩余参数接收剩余的值
+        const [x, y, ...rest] = [4, 5, 6, 7];
+        console.log("x, y: ", x, y);    // x, y:  4 5
+        console.log("rest: ", ...rest); // rest:  6 7
+
+        // 4. 为了防止因 出现（1）的情况，可以给赋值元素设置 默认值
+        const [m, n, p = 30, q = 40] = [10, 20];
+        console.log("m,n: ", m, n); // m,n:  10 20
+        console.log("p ", p); // p  30
+        console.log("q ", q); // q  40
+
+        // 5. 按需导入（赋值)解构元素
+        // 比如下面的 l 不是 '3' 而是 '4' ，因为空出了一个元素
+        const [h, j, , l] = [1, 2, 3, 4];
+        console.log('h,j: ', h, j); // h,j:  1 2
+        console.log('l: ', l); // l:  4
+
+        // 6. 支持 多维数组 的数组解构
+        const arr = [1, 2, [3, 4]];
+        const [k, r, s] = arr;
+        console.log("k,r: ", k, r); //  k,r:  1 2
+        console.log("s: ", s); // s:  [3, 4]
+        const [u, v] = s;
+        console.log("u,v: ", u, v); // u,v:  3 4
+        /**
+          上述 s 表示 [3,4] 即原数组第三个元素。然后在对 s 解构
+          即 [u,v] = s，u为3,v为4
+          也可以一步到位
+          const [k,r,[s,t]] = arr 
+          k为1,r为2,s为3,t为4
+         */
+    </script>
+</body>
+
+</html>

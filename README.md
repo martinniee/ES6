@@ -457,8 +457,104 @@ const obj3 = {
             // 箭头函数的 this 指向上一层作用域的 this
             console.log(this); // obj3
         }
-        }
+    }
 }
 obj3.sayHi();
 ```
 
+
+
+## 解构赋值
+
+### 数组解构
+
+数组解构是将数组的单元值**快速批量赋值**给一系列变量的**简洁语法**
+
+基本语法：
+
+1. 赋值运算符`=`左侧的`[]`用于批量声明变量，右侧数组的单元值将被赋值给左侧的变量
+2. 变量的顺序**对应数组单元值的位置**依次进行赋值操作
+
+1，基本使用
+
+```javascript
+// 1. 数组解构：基本使用
+const arr = [100, 200, 300];
+const [max, min, avg] = arr;
+console.log("max: ", max); // max:  100
+console.log("min: ", min); // min:  200
+console.log("avg: ", avg); // avg:  300
+// 2. 数组解构：交换变量的值
+let a = 1;
+let b = 2;
+[a, b] = [b, a];
+console.log(`a是${a},b是${b}`); // a是2,b是1
+```
+
+2，⚠️ 必须加分号的两种情况
+
+```javascript
+// 1. 立即执行函数需要添加 ';' 
+(function () { })();
+
+// 2. 使用数组的时候
+// const arr = [1, 2, 3];
+const str = 'foo'
+// const str = 'foo'; // 使用封号
+[1, 2, 3].map(function (item) {
+	console.log("item:", item); // Uncaught TypeError: Cannot read properties of undefined (reading 'map')
+})
+/*
+    如果上述代码 const str = 'foo' 后 无 ';'，则代码解析会成为
+    const str = foo[1,2,3],map...  这样的结构，而没有 foo[1,2,3] 这样的数组，因此没有
+    map()方法，就会出错
+*/
+```
+
+3，数组解构细节
+
+```javascript
+// 1. 赋值元素数量 大于 解构元素数量，则未赋值元素值为 undefine
+const [a, b, c, d] = [1, 2, 3];
+console.log(a, b, c, d); // 1 2 3 undefined
+
+// 2. 赋值元素数量 小于 解构元素数量，则有多余的
+// 3. 使用剩余参数接收剩余的值
+const [x, y, ...rest] = [4, 5, 6, 7];
+console.log("x, y: ", x, y);    // x, y:  4 5
+console.log("rest: ", ...rest); // rest:  6 7
+
+// 4. 为了防止因 出现（1）的情况，可以给赋值元素设置 默认值
+const [m, n, p = 30, q = 40] = [10, 20];
+console.log("m,n: ", m, n); // m,n:  10 20
+console.log("p ", p); // p  30
+console.log("q ", q); // q  40
+
+// 5. 按需导入（赋值)解构元素
+// 比如下面的 l 不是 '3' 而是 '4' ，因为空出了一个元素
+const [h, j, , l] = [1, 2, 3, 4];
+console.log('h,j: ', h, j); // h,j:  1 2
+console.log('l: ', l); // l:  4
+
+// 6. 支持 多维数组 的数组解构
+const arr = [1, 2, [3, 4]];
+const [k, r, s] = arr;
+console.log("k,r: ", k, r); //  k,r:  1 2
+console.log("s: ", s); // s:  [3, 4]
+const [u, v] = s;
+console.log("u,v: ", u, v); // u,v:  3 4
+/**
+    上述 s 表示 [3,4] 即原数组第三个元素。然后在对 s 解构
+    即 [u,v] = s，u为3,v为4
+    也可以一步到位
+    const [k,r,[s,t]] = arr 
+    k为1,r为2,s为3,t为4
+*/
+
+```
+
+
+
+
+
+### 对象解构

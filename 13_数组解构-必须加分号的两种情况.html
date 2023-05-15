@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13_数组解构-必须加分号的两种情况</title>
+</head>
+
+<body>
+    <script>
+        // 1. 立即执行函数需要添加 ';' 
+        (function () { })();
+        // 2. 使用数组的时候
+        // const arr = [1, 2, 3];
+        const str = 'foo'
+        // const str = 'foo'; // 使用封号
+        [1, 2, 3].map(function (item) {
+            console.log("item:", item); // Uncaught TypeError: Cannot read properties of undefined (reading 'map')
+        })
+        /*
+         如果上述代码 const str = 'foo' 后 无 ';'，则代码解析会成为
+         const str = foo[1,2,3],map...  这样的结构，而没有 foo[1,2,3] 这样的数组，因此没有
+         map()方法，就会出错
+        */
+    </script>
+</body>
+
+</html>
