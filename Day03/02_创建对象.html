@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_创建对象</title>
+</head>
+
+<body>
+    <script>
+        // 1. 传统创建对象的方式：对象字面量
+        const o = {
+            name: 'foo',
+        }
+        console.log("o: ", o); // o:  {name: 'foo'}
+        // 2. 创建对象：使用 new Object()
+        const obj = new Object();
+        console.log("obj: ", obj); // obj:  {}
+        obj.name = 'foo';
+        console.log("obj: ", obj); // obj:  {name: 'foo'}
+        // 创建对象：使用 new Object(),并传入字面量对象
+        const obj2 = new Object({ name: 'foo' });
+        console.log("obj2: ", obj2); // obj2:  {name: 'foo'}
+    </script>
+</body>
+
+</html>
