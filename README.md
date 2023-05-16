@@ -719,3 +719,65 @@ console.log("hw: ", hw); // hw:  Goods {name: '华为', price: 3999, count: 59}
 
  
 
+## 实例成员&静态成员
+
+面向对象编程中的两类成员
+
+- 实例成员
+- 静态成员
+
+
+
+实例成员：**实例对象**上的成员
+
+- 实例属性：实例对象的方法称为实例属性
+- 实例方法：实例对象上的方法称为实例方法
+
+与之对应的，还有构造函数的静态成员（属性，方法）
+
+```javascript
+// 实例成员&静态成员
+// -----------------1. 实例成员-----------------
+function Pig(name) {
+    this.name = name;
+}
+const peiqi = new Pig('佩奇');
+const george = new Pig('乔治');
+// 给实例对象 添加 实例成员属性
+peiqi.name = '小猪佩奇';
+// 给实例对象 添加 实例成员方法
+peiqi.sayHi = () => {
+    console.log("hi~~~~~~~~,我是 peiqi的 sayHi 实例成员方法");;
+}
+console.log("peiqi： ", peiqi); // peiqi：  Pig {name: '小猪佩奇', sayHi: ƒ}
+// 使用同一构造函数创建的对象是不同的对象，彼此独立，互不影响
+console.log("peiqi === george：", peiqi === george);// peiqi === george： false
+
+// -----------------2. 静态成员-----------------
+// (1) 静态成员只能由构造函数访问，（2）静态方法中的 this 指向 构造函数
+function Dog(name) {
+    this.name = name; // 静态成员属性
+}
+
+// 给构造函数 添加 静态成员属性
+Dog.name = '小黄';
+// 给构造函数 添加 静态成员方法
+Dog.bark = function () {
+    console.log("this: ", this); // this 就是 构造函数
+    /*
+                this:  ƒ Dog(name) {
+                    this.name = name; // 静态成员属性
+                }
+            */
+    console.log("汪汪汪~~ 🐕"); // 汪汪汪~~ 🐕
+}
+Dog.bark();
+console.log("Dog: ", Dog);
+/*
+         输出结果
+                Dog:  ƒ Dog(name) {
+                    this.name = name; // 静态成员属性
+                }
+        */
+```
+
