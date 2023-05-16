@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_构造函数</title>
+</head>
+
+<body>
+    <script>
+        /*
+         构造函数
+            - 构造函数：是一种特殊的函数，主要用来初始化对象
+            - 使用场景：常规的`{...}`语法允许创建一个对象。比如我们创建了foo的对象，继续创建bar的对象还需要重新写一
+遍，此时可以通过构造函数来快速创建多个类似的对象。
+         */
+        // 1.定义构造函数
+        // 构造函数名称首字母大写，如 Pig
+        function Pig(name, age) {
+            this.name = name;
+            this.age = age;
+            // 构造函数内无需书写 return 语句，返回值即新创建的对象
+        }
+        // 2.调用构造函数实例化对象
+        const peiqi = new Pig('佩奇', 6);
+        console.log("peiqiL: ", peiqi); // peiqiL:  Pig {name: '佩奇', age: 6}
+
+        // 案例：
+        function Goods(name, price, count) {
+            this.name = name;
+            this.price = price;
+            this.count = count;
+        }
+        const m1 = new Goods('小米', 1000, 20);
+        console.log("m1: ", m1); // m1:  Goods {name: '小米', price: 1000, count: 20}
+        const hw = new Goods('华为', 3999, 59);
+        console.log("hw: ", hw); // hw:  Goods {name: '华为', price: 3999, count: 59}
+    </script>
+</body>
+
+</html>

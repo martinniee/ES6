@@ -662,5 +662,46 @@ console.log("result: ", result); // result:  [20, 30, 40]
 ## 创建对象的三种方式
 
 ```javascript
+// 1. -----------------传统创建对象的方式：对象字面量-----------------
+const o = {
+    name: 'foo',
+}
+console.log("o: ", o); // o:  {name: 'foo'}
+// 2. -----------------创建对象：使用 new Object()-----------------
+const obj = new Object();
+console.log("obj: ", obj); // obj:  {}
+obj.name = 'foo';
+console.log("obj: ", obj); // obj:  {name: 'foo'}
+// 创建对象：使用 new Object(),并传入字面量对象
+const obj2 = new Object({ name: 'foo' });
+console.log("obj2: ", obj2); // obj2:  {name: 'foo'}
+
+/*
+    3.-----------------构造函数-----------------
+        - 构造函数：是一种特殊的函数，主要用来初始化对象
+        - 使用场景：常规的`{...}`语法允许创建一个对象。比如我们创建了foo的对象，继续创建bar的对象还需要重新写一
+        遍，此时可以通过构造函数来快速创建多个类似的对象。
+*/
+// 1.定义构造函数
+// 构造函数名称首字母大写，如 Pig
+function Pig(name, age) {
+    this.name = name;
+    this.age = age;
+    // 构造函数内无需书写 return 语句，返回值即新创建的对象
+}
+// 2.调用构造函数实例化对象
+const peiqi = new Pig('佩奇', 6);
+console.log("peiqiL: ", peiqi); // peiqiL:  Pig {name: '佩奇', age: 6}
+
+// 案例：
+function Goods(name, price, count) {
+    this.name = name;
+    this.price = price;
+    this.count = count;
+}
+const m1 = new Goods('小米', 1000, 20);
+console.log("m1: ", m1); // m1:  Goods {name: '小米', price: 1000, count: 20}
+const hw = new Goods('华为', 3999, 59);
+console.log("hw: ", hw); // hw:  Goods {name: '华为', price: 3999, count: 59}
 ```
 
