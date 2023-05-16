@@ -808,3 +808,30 @@ const num = 12;
 
 
 
+## Object静态方法
+
+**内置构造函数**
+
+1. 引用类型：Object，Array，RegExp，Date等
+2. 包装类型：String，Number，Boolean等
+
+```javascript
+// 1. Object.keys() 获取对象中所有的 key，并放到数组返回
+const obj = { name: 'foo', age: 12, sex: 'female' };
+const keyArr = Object.keys(obj);
+console.log("keyArr: ", keyArr); // keyArr:  (3) ['name', 'age', 'sex']
+
+// 2. Object.values() 获取对象中所有的 value，并放到数组返回
+const obj2 = { name: 'foo', age: 12, sex: 'female' };
+const valueArr = Object.values(obj);
+console.log("valueArr: ", valueArr); //valueArr:  (3) ['foo', 12, 'female']
+
+// 3. Object.assign(target,source) 将指定源对象的 全部键值对 拷贝到 目标对象（深拷贝）
+const o1 = {}; // 空对象（目标对象）
+const o2 = { name: 'foo', age: 12, sex: 'female' }; // 源对象
+Object.assign(o1, o2);
+console.log("o1: ", o1); // o1:  {name: 'foo', age: 12, sex: 'female'}
+```
+
+
+
