@@ -781,3 +781,30 @@ console.log("Dog: ", Dog);
         */
 ```
 
+## 基本包装类型
+
+JavaScript中的数据类型：
+
+1. 基本数据类型（6种）：string, number, boolean, undefined, null
+
+2. 引用类型：object
+
+基本数据数据类型的**包装类型**
+
+- string 对应 String 
+- number 对应 Number
+- boolean 对应 Boolean
+- 。。。
+
+```javascript
+// 底层：将基本数据类型 包装为 引用类型
+// 1. string 到 String
+const str = 'foo';
+// 底层： const str = String('foo');
+// 2. number 到 Number 
+const num = 12;
+// 底层：const num = Nubmer(12);
+```
+
+
+
