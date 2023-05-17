@@ -901,7 +901,82 @@ console.log("totalSal: ", totalSal); // totalSal:  46800
 
 ### find，every...
 
+```javascript
+const arr = ['red', 'blue', 'green'];
+// -----------------1. find-----------------
+// find()方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。
+const res = arr.find(function (item) {
+    // 条件：item === 'blue'
+    return item === 'blue';
+})
+console.log("res: ", res); // res:  blue
+// -----------------2. every()-----------------
+// every() 方法测试一个数组内的所有元素是否都能通过指定函数的测试。它返回一个布尔值。
+const flag = arr.every(function (item) {
+    // 条件：item.length > 2
+    return item.length > 3;
+})
+console.log("flag: ", flag); // flag:  false
+// -----------------3. some()-----------------
+// some() 方法测试数组中是否至少有一个元素通过了由提供的函数实现的测试。如果在数组中找到一个元素使得提供的函数返回 true，则返回 true；否则返回 false。它不会修改数组。
+const flag1 = arr.some(function (item) {
+    return item.length > 3;
+})
+console.log("flag1: ", flag1); // flag1:  true
+```
+
+小案例：
+
+```javascript
+const spec = { size: '40cm*40cm', color: '黑色' };
+// 1. 使用 values 获取对象的所有值的数组
+const values = Object.values(spec);
+// 2. 拼接数组使用 '/' 符号
+const res = values.join('/');
+console.log("res: ", res); // res:  40cm*40cm/黑色
+document.querySelector('div').innerHTML = res;
+```
 
 
-​	
+
+> API类的查找API文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/
+
+数组常见的其他方法（全）
+
+1. join
+2. find
+3. every
+4. some
+5. concat
+6. sort
+7. splice
+8. reverse
+9. findIndex
+
+扩展：将伪数组转为真数组——使用 Array.from() 
+
+```html
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        // 使用 querySelectorAll 的数组是伪数组
+        const lis = document.querySelectorAll('ul li');
+        console.log("lis: ", lis); // lis:  NodeList(3) [li, li, li]
+        // 尝试使用数组的 pop的方法删除某个元素
+        // lis.pop();// Uncaught TypeError: lis.pop is not a function
+
+        // 使用 Array.from() 可以将 伪数组 转为 真数组
+        const lis2 = Array.from(lis);
+        lis2.pop(); // 删除数组最后一个元素 
+        console.log("lis2: ", lis2); // lis2:  (2) [li, li]
+
+    </script>
+</body>
+```
+
+
 
