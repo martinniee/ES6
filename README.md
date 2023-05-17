@@ -996,7 +996,7 @@ console.log("arr: ", arr); // arr:  (5) ['foo', 'bar', 'baz', 'baba', 'papa']
 // substring() 方法返回一个字符串在开始索引到结束索引之间的一个子集，或从开始索引直到字符串的末尾的一个子集。
 /*
    1）substring(num) 默认截取从索引num开始往后的全部字符串
-      2）substring(num1,num2) 默认截取从索引num1到num2（不包括索引num2的元素）的字符串
+   2）substring(num1,num2) 默认截取从索引num1到num2（不包括索引num2的元素）的字符串
         */
 const str2 = 'fast image cleaner plugin is awsome';
 // 截取 str2 索引为5及其后： image cleaner plugin is awsome
@@ -1015,4 +1015,23 @@ console.log("判断 str3 是否包含 hello: ", str3.includes('hello')); //判�
 console.log("判断 str3 是否包含 anyone: ", str3.includes('anyone')); // 判断 str3 是否包含 anyone:  false
 console.log("判断 str3 索引 11 开始及其后的字符串是否包含 one: ", str3.includes('one', 11)); // 判断 str3 索引 11 开始及其后的字符串是否包含 one:  true
 ```
+
+
+
+## 渲染商品案例
+
+```html
+<div></div>
+<script>
+    // 需求：将使用指定字符分隔的字符串中的被分隔的字符串提取出来，按照指定格式渲染到页面中
+    // 目标字符串，使用 ',' 分隔
+    const str = 'JavaScript-ES5,JavaScript-ES6';
+// 处理到的目标字符串
+const res = str.split(',').map(item => `<span>【JS】${item}</span><br>`).join('');
+// 渲染到页面
+document.querySelector('div').innerHTML = res;
+</script>
+```
+
+
 
