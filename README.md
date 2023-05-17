@@ -1035,3 +1035,27 @@ document.querySelector('div').innerHTML = res;
 
 
 
+## 综合案例-购物车案例
+
+
+
+介绍一个Number的方法：`toFixed()` ,设置保留小数位数的长度。
+
+```javascript
+// toFixed()
+// toFixed() 方法使用定点表示法来格式化一个数值。返回格式化后的字符串
+const num = 10.723;
+const num2 = 10.123;
+console.log("保留整数位（5入）：", num.toFixed());   // 保留整数位（5入）： 11
+console.log("保留整数位（4舍）：", num2.toFixed());  // 保留整数位（4舍）： 10
+console.log("保留小数点后两位: ", num.toFixed(2));  // 保留小数点后两位:  10.72
+console.log("保留小数点后两位: ", num2.toFixed(2)); // 保留小数点后两位:  10.12
+console.log("保留整数小数点后两位: ", num3.toFixed(2)); // 保留整数小数点后两位:  10.00
+```
+
+代码：https://github.com/martinniee/ES6/blob/main/Day03/14_%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html
+
+效果：https://htmlpreview.github.io/?https://github.com/martinniee/ES6/blob/main/Day03/14_%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html
+
+
+
