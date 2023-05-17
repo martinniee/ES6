@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06_数组reduce()方法</title>
+</head>
+
+<body>
+    <script>
+        // 1. 方式1： 没有初始值
+        const arr = [1, 3, 5, 7, 9];
+        const total = arr.reduce(function (pre, current) {
+            return pre + current;
+        })
+        console.log("total: ", total); // total:  25
+        // 2. 方式2： 有初始值
+        const total2 = arr.reduce(function (pre, current) {
+            return pre + current;
+        }, 10)
+        console.log("total2: ", total2); // total2:  35
+
+
+    </script>
+</body>
+
+</html>

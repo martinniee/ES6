@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08_计算薪资案例</title>
+</head>
+
+<body>
+    <script>
+        const arr = [
+            {
+                name: '张三', salary: 10000,
+            },
+            {
+                name: '李四', salary: 12000,
+            },
+            {
+                name: '王五', salary: 14000,
+            },
+        ]
+        // 此处由于数组的元素是对象，所以使用 reduce必须需要设置  初始值
+        // 当设置了 初始值，则 pre的第一次值是 初始值（0）
+        const totalSal = arr.reduce(function (pre, current) {
+            return pre + current.salary * 1.3;
+        }, 0)
+        console.log("totalSal: ", totalSal); // totalSal:  46800
+    </script>
+</body>
+
+</html>

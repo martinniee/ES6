@@ -835,3 +835,73 @@ console.log("o1: ", o1); // o1:  {name: 'foo', age: 12, sex: 'female'}
 
 
 
+## 数组方法
+
+数组的实例方法：
+
+| 方法    | 作用     | 说明                                       |
+| ------- | -------- | ------------------------------------------ |
+| forEach | 遍历数组 | 不返回数组，经常用于查找遍历数字组元素     |
+| filter  | 过滤数组 | **返回新数组**，返回的是满足条件的数组元素 |
+| map     | 迭代数组 | **返回新数组**，返回处理后元素到新的数组   |
+| reduce  | 累计器   | 返回累计处理的结果，经常用于求和           |
+
+### reduce()
+
+reduce语法：
+
+```javascript
+// 方式1
+arr.reduce(function(){}, 初始值)
+// 方式2
+arr.reduce(function(上一次值,当前值){}, 初始值)
+```
+
+代码：
+
+```javascript
+// 1. 方式1： 没有初始值
+const arr = [1, 3, 5, 7, 9];
+const total = arr.reduce(function (pre, current) {
+    return pre + current;
+})
+console.log("total: ", total); // total:  25
+// 2. 方式2： 有初始值
+const total2 = arr.reduce(function (pre, current) {
+    return pre + current;
+}, 10)
+console.log("total2: ", total2); // total2:  35
+```
+
+应用案例：给所有员工涨薪 `30%`。
+
+```javascript
+const arr = [
+    {
+        name: '张三', salary: 10000,
+    },
+    {
+        name: '李四', salary: 12000,
+    },
+    {
+        name: '王五', salary: 14000,
+    },
+]
+// 此处由于数组的元素是对象，所以使用 reduce必须需要设置  初始值
+// 当设置了 初始值，则 pre的第一次值是 初始值（0）
+const totalSal = arr.reduce(function (pre, current) {
+    return pre + current.salary * 1.3;
+}, 0)
+console.log("totalSal: ", totalSal); // totalSal:  46800
+```
+
+>  为了更好的理解 reduce ，需要先理解迭代：
+
+
+
+### find，every...
+
+
+
+​	
+
