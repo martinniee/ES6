@@ -1172,3 +1172,25 @@ console.log("thatThis === foo? ", thatThis === foo); //thatThis === foo?  true
 console.log("thatSing === foo? ", thatSing === foo); //thatSing === foo?  true
 ```
 
+## 数组扩展-自定义求最大值最小值和求和的方法
+
+```javascript
+// 自定义数组求最大值，最小值，求和方法
+const arr = [1, 2, 7, 2, 8, 5];
+// 1. 自定义求最大值
+Array.prototype.max = function () {
+    return Math.max(...this);
+}
+console.log("arr最大值：", arr.max()); // arr最大值： 8
+// 2. 自定义求最小值
+Array.prototype.min = function () {
+    return Math.min(...this);
+}
+console.log("arr最小值：", arr.min()); // arr最小值： 1
+// 3. 自定义求和
+Array.prototype.sum = function () {
+    return this.reduce((pre, current) => pre + current, 0)
+}
+console.log("arr求和：", arr.sum()); // arr求和： 25
+```
+
