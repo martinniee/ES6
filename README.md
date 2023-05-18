@@ -1339,3 +1339,38 @@ man.giveBirth();
 > ```
 >
 > 
+
+
+
+## 原型链及instanceof运算符
+
+原型链
+
+- ①当访问一个对象的属性（包括方法）时，首先查找这个对象自身有没
+- ②如果没有就查找它的原型（也就是`__proto__`指向的`prototype`原型对象
+- ③如果还没有就查找原型对象的原型(Object的原型对象)
+- ④依此类推一直找到``Object为止(null)``
+- ⑤`__proto__`对象**原型的意义**就在于为对象成员查找机制提供一个方向，或者说一条路线
+- ⑥可以使用`instanceof`运算符用于检测构造函数的`prototype`属性是否出现在某个实例对象的原型链上
+
+基于原型对象的继承使得**不同构造函数的原型对象**关联在一起，并且这种关联的关系是一种链状的结构，我们将原型对象的**链状结构关系称为原型链**![image-20230518144843964](assets/README-images/image-20230518144843964.png)
+
+```javascript
+// 对象.__proto__ = 构造函数.prototype
+function Person() {
+
+}
+const person = new Person();
+console.log(person.__proto__ === Person.prototype); // true
+console.log(Person.prototype.__proto__.constructor === Object); // true
+console.log(Object.prototype.__proto__ === null); // true
+// -----------------使用 instanceof 运算符-----------------
+// 判断 person 是否 由 Person 构造函数创建
+console.log(person instanceof Person); // true
+const obj = new Object();
+// 判断  obj 是否 由 Object 构造函数创建
+console.log(obj instanceof Object); // true
+// 判断  {} 是否 由 Object 构造函数创建
+console.log({} instanceof Object); // true
+```
+

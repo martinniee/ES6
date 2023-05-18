@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07_原型链</title>
+</head>
+
+<body>
+    <script>
+        // 对象.__proto__ = 构造函数.prototype
+        function Person() {
+
+        }
+        const person = new Person();
+        console.log(person.__proto__ === Person.prototype); // true
+        console.log(Person.prototype.__proto__.constructor === Object); // true
+        console.log(Object.prototype.__proto__ === null); // true
+        // -----------------使用 instanceof 运算符-----------------
+        // 判断 person 是否 由 Person 构造函数创建
+        console.log(person instanceof Person); // true
+        const obj = new Object();
+        // 判断  obj 是否 由 Object 构造函数创建
+        console.log(obj instanceof Object); // true
+        // 判断  {} 是否 由 Object 构造函数创建
+        console.log({} instanceof Object); // true
+    </script>
+</body>
+
+</html>
