@@ -1234,3 +1234,25 @@ console.log("赋值后的Star.prototype: ", Star.prototype);
 
 
 ![image-20230518112057368](assets/README-images/image-20230518112057368.png)
+
+
+
+## 对象原型__proto__
+
+对象原型
+
+- 对象都会有一个属性`__proto__`指向构造函数的prototype原型对象，之所以我们对象可以使用构造函数prototype原型对象的属性和方法，就是因为对象有`__proto__`原型的存在。
+
+注意：
+
+- `__proto__`是JS**非标准属性**，不同浏览器显示不同。`[[prototype]]` 和`__proto_`意义相同。
+- 不管如何表示，都用来表示**当前实例对象的原型对象**（prototype）。
+- `__proto_`对象原型中也有一个`constructor`属性用来**指向创建该实例对象的构造函数**
+
+```javascript
+function Star() { }
+const foo = new Star();
+// foo.__proto__ === Star.prototype ?  true
+console.log("foo.__proto__ === Star.prototype ? ", foo.__proto__ === Star.prototype);
+```
+
