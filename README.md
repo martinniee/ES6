@@ -45,6 +45,11 @@ Day03-深入面向对象
 1. 编程思想
 2. 构造函数
 3. 原型
+   1. 原型
+   2. contructor属性
+   3. 对象原型
+   4. 原型继承
+   5. 原型链
 4. 综合案例
 
 
@@ -1105,4 +1110,65 @@ console.log("foo === bar", foo === bar); // foo === bar false
 ```
 
 ## 原型对象prototype
+
+目标：能够利用**原型对象实现方法共享**
+
+- 构造函数通过原型分配的函数是**所有对象所共享的。**
+- JavaScript规定，每一个构造函数都有一个`prototype`属性，指向另一个对象，所以我们也称为原型对象
+- 这个对象可以挂载函数，**对象实例化不会多次创建原型上函数，节约内存**
+- 我们可以把那些不变的方法，直接定义在prototype对象上，这样所有对象的实例就可以共享这些方法。
+- 构造函数和原型对象中的this都指向实例化的对象
+
+> 简单来说：对象是由 构造函数创建，假设若干对象都有同一个构造函数创建，而此构造函数又有唯一的原型属性`prototype`，因此所有对象都能共享这个原型属性（或 原型对象），因此也就能共享此原型对象上的数据。
+
+```javascript
+// 构造函数实现封装存在的问题
+function Star(name, age) {
+    this.name = name;
+    this.age = age;
+    /*  this.sing = function () {
+                 console.log("唱歌");
+             } */
+}
+const foo = new Star('foo', 19);
+const bar = new Star('bar', 18);
+// 使用构造函数 创建的对象是不同的对象，如果创建对象数量过多，会造成内存浪费。
+console.log("foo === bar", foo === bar); // foo === bar false
+// 输出 Star 此构造函数的原型属性（对象）
+console.log("Star的原型属性: ",);
+// console.dir(Star.prototype);
+// 将方法 挂载到原型上,这样对象可共享使用
+Star.prototype.sing = function () {
+    console.log("唱歌");
+}
+foo.sing();
+bar.sing();
+// 这样不同对象所调用的 sing 方法是同一个
+console.log("foo.sing === bar.sing ?", foo.sing === bar.sing); // foo.sing === bar.sing ? true
+```
+
+使用建议：
+
+- 将**公共的属性**定义在**构造函数**中，保证每个对象有不同的属性数据。
+- 将**公共的方法**定义在构造函数的**原型对象**上，减少内存损耗（因为方法仅调用，结构一致，无需多创建）。
+
+扩展：探究构造函数和原型this的指向
+
+```javascript
+// 探究 构造函数中this 和 挂载到构造函数原型对象上的方法中的this与实例对象的关系
+let thatThis;
+let thatSing;
+function Star(name) {
+    thatThis = this;
+    this.name = name;
+}
+const foo = new Star('foo');
+Star.prototype.sing = function () {
+    console.log(`${this.name}调用了sing()`); // foo调用了sing()
+    thatSing = this;
+}
+foo.sing();
+console.log("thatThis === foo? ", thatThis === foo); //thatThis === foo?  true
+console.log("thatSing === foo? ", thatSing === foo); //thatSing === foo?  true
+```
 

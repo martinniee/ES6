@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_构造函数和原型this的指向</title>
+</head>
+
+<body>
+    <script>
+        // 探究 构造函数中this 和 挂载到构造函数原型对象上的方法中的this与实例对象的关系
+        let thatThis;
+        let thatSing;
+        function Star(name) {
+            thatThis = this;
+            this.name = name;
+        }
+        const foo = new Star('foo');
+        Star.prototype.sing = function () {
+            console.log(`${this.name}调用了sing()`); // foo调用了sing()
+            thatSing = this;
+        }
+        foo.sing();
+        console.log("thatThis === foo? ", thatThis === foo); //thatThis === foo?  true
+        console.log("thatSing === foo? ", thatSing === foo); //thatSing === foo?  true
+
+    </script>
+</body>
+
+</html>

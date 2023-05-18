@@ -14,14 +14,26 @@
         function Star(name, age) {
             this.name = name;
             this.age = age;
-            this.sing = function () {
-                console.log("唱歌");
-            }
+            /*  this.sing = function () {
+                 console.log("唱歌");
+             } */
         }
         const foo = new Star('foo', 19);
         const bar = new Star('bar', 18);
         // 使用构造函数 创建的对象是不同的对象，如果创建对象数量过多，会造成内存浪费。
         console.log("foo === bar", foo === bar); // foo === bar false
+        // 输出 Star 此构造函数的原型属性（对象）
+        console.log("Star的原型属性: ",);
+        // console.dir(Star.prototype);
+        // 将方法 挂载到原型上,这样对象可共享使用
+        Star.prototype.sing = function () {
+            console.log("唱歌");
+        }
+        foo.sing();
+        bar.sing();
+        // 这样不同对象所调用的 sing 方法是同一个
+        console.log("foo.sing === bar.sing ?", foo.sing === bar.sing); // foo.sing === bar.sing ? true
+
     </script>
 </body>
 
