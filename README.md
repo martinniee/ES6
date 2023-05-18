@@ -1256,3 +1256,86 @@ const foo = new Star();
 console.log("foo.__proto__ === Star.prototype ? ", foo.__proto__ === Star.prototype);
 ```
 
+## 原型继承
+
+继承是**面向对象编程的另一个特征**，通过继承进一步提升代码封装的程度，JavaScript中大多是借助原型对象实现继承的特性。
+
+**原型对象也是对象**，原型对象也由构造函数创建。**使用构造函数创建不同的原型对象**，但是结构相同。
+
+- 当**不同构造函数**中定义的数据存在**结构相同甚至数据相同**时，需要提取为**公共**到**构造函数的原型对象**上以便**数据可以被共享**
+- 当不同构造函数创建的**对象属性或方法有差异**时，此**构造函数的原型对象也应不同**，这时可以定义构造函数来**创建不同的原型对象**
+
+```javascript
+/*
+            - 当不同构造函数中定义的数据存在结构相同甚至数据相同时，需要提取为公共到构造函数的原型对象上以便数据可以被共享
+            - 当不同构造函数创建的对象属性或方法有差异时，此构造函数的原型对象也应不同，这时可以定义构造函数来创建不同的原型对象
+        */
+// 定义一个对象作为原型 用于储存 女人和 男人的数据和方法
+/*   const person = {
+              ears: 2,
+              head: 1
+          } */
+// 定义一个构造函数创建不同的person原型对象
+function Person() { this.ears = 2; this.head = 1; }
+// Woman 通过 原型继承 继承属性和方法
+function Woman() { };  // 定义一个女人的构造函数
+/* Woman.prototype = person; // 此时的person是同一个
+        Woman.prototype.constructor = Woman;*/
+Woman.prototype = new Person(); // 此时 person 时单独创建的
+//  此时的 Woman.prototype 和 Man.prototype 不是同一个对象，所以
+// Man的原型没有 giveBirth()
+Woman.prototype.giveBirth = function () {
+    console.log("生孩子");
+}
+Woman.prototype.constructor = Woman;
+const woman = new Woman();// 使用此构造函数创建 女人
+// 而 Woman的原型有 giveBirth(),会正常输出
+woman.giveBirth(); // 生孩子
+// ----------------- -----------------
+function Man() { };// 定义一个男人的构造函数
+// Man 通过 原型继承 继承属性和方法
+/*  Man.prototype = person; // 此时的person时同一个
+         Man.prototype.constructor = Man; */
+Man.prototype = new Person(); // 此时 person 时单独创建的
+Man.prototype.constructor = Man;
+const man = new Man(); // 使用此构造函数创建 男人
+// 因为Man的原型没有 giveBirth()，所以使用会报错
+// Uncaught TypeError: man.giveBirth is not a function
+man.giveBirth();
+```
+
+> **简单说**：JS中构造函数起着 面向对象编程 中的**继承**作用，因此**构造函数相当于父类**，**实例对象相当于子类**。而所继承的“东西”中，属性是基本类型，**属性结构相同**可也直接定义在构造函数中，但是方法是引用类型且只需调用，可共享，因此需要放在构造函数的原型对象上。
+>
+> **原型继承的使用需求**：有两个对象，对象有差异性，但也有相同之处。差异性使得需要**分别定义构造函数创建这两个对象**，相同之处使得**创建对象用到的数据可以定义在原型对象**上，可以共享。
+>
+> 假设有两个构造函数 A，B，分别创建a,b两个实例对象，A,B公用一个原型对象储存相同的数据（结构和值都一样）。`a` 和`b`的行为上有差异，如`a`有`demo()`方法，而`b`没有。若 A,B的原型对象为同一个，则 `a,b `都会继承 `demo()`,显然`b`不需要。
+>
+> 因此为了保证继承的"东西"的独立，需要保证`a`对应的对象原型和`b`对应的对象原型非同一个对象（但是结构相同）,则可以定义一个构造函数C创建不同的原型对象。
+>
+> ```javascript
+> function C(){
+>     // 相同之处
+>     this.name = 'xxx';
+>     this.age = 'yyy';
+> }
+> funtion A(){
+>       // 不定义数据，放在原型对象上
+> }
+> A.prototype = new C();
+> A.prototype.constructor = A;
+> // ⚠️此时给A的原型对象添加一个 demo()方法，a可以使用demo()，不影响 B的原型对象，也不影响 b，B和b都没有demo()
+> A.prototype.dmeo() = function(){ console.log("我是dmeo"); }
+> function B(){
+>       // 不定义数据，放在原型对象上
+> }
+> B.prototype = new C();
+> B.prototype.constructor = B;
+> const a = new A(); // 创建a
+> a.demo(); // a 往原型链上找, a的对象原型上有 demo()方法
+> // 我是dmeo
+> const b = new B(); // 创建a
+> b.demo(); // b 往原型链上找, b的对象原型上没有 demo()方法,会报错
+> // Uncaught TypeError: b.demo is not a function
+> ```
+>
+> 
