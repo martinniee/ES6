@@ -1583,3 +1583,47 @@ console.log(o);
 2. 将预估可能发生错误的代码写在ty代码段中
 3. 如果try代码段中出现错误后，会执行catch代码段，并截获到错误信息
 4. finally不管是否有错误，都会执行
+
+
+
+## 改变this
+
+**this指向**
+
+- 普通函数：由调用的对象决定，指向调用的对象（严格模式指向 `undefined`）
+- 箭头函数：由上下文环境决定，是**最近作用域**的this
+
+**改变this指向的三种方法**
+
+- call()
+- appy()
+- bind()
+
+
+
+### call()
+
+(了解) 使用`call`方法调用函数，同时指定**被调用函数中this的值**
+
+语法：`fun.call(thisArg,arg1,arg2,...)`
+
+```javascript
+const obj = {
+    name: 'foo',
+    age: 18
+}
+function fn(x, y) {
+    // 默认调用函数 this 指向 window
+    console.log(this, x, y); // {name: 'foo', age: 18} 1 2
+}
+
+// 可用使用call()方法让 this 指向指定对象 （thisArg 参数）
+// call(thisArg,arg1,arg2,...)
+fn.call(obj, 1, 2);
+```
+
+
+
+### appy()
+
+### bind()
