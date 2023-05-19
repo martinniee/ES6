@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07_loadsh实现深拷贝</title>
+    <!-- https://raw.githubusercontent.com/lodash/lodash/4.17.15-npm/lodash.js -->
+    <script src="./lodash.js"></script>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            name: 'foo',
+            age: 18,
+            friend: [
+                {
+                    name: 'zhangsan',
+                    age: 20,
+                    friend: [
+                        {
+                            name: 'cate',
+                            age: 19,
+                        },
+                        {
+                            name: 'lili',
+                            age: 17,
+                        },
+                    ]
+                },
+                {
+                    name: 'lisi',
+                    age: 21,
+                }
+            ]
+        }
+        // 使用 lodash 工具实现深拷贝
+        const o = _.cloneDeep(obj)
+        console.log(o);
+    </script>
+</body>
+
+</html>

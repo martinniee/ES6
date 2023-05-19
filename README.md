@@ -1427,6 +1427,7 @@ console.log(obj.age); // 18 */
 
 1. 递归（简易）
 2. 使用开源工具 lodash
+3. 利用 JSON 实现深拷贝
 
 ### 递归实现
 
@@ -1483,5 +1484,65 @@ function deepCopy(newObj, oldObj) {
 	}
 }
 deepCopy(o, obj);
+console.log(o);
+```
+
+### lodash 实现
+
+```html
+<!-- https://raw.githubusercontent.com/lodash/lodash/4.17.15-npm/lodash.js -->
+<script src="./lodash.js"></script>
+<script>
+	const obj = {
+		name: "foo",
+		age: 18,
+		friend: [
+			{
+				name: "zhangsan",
+				age: 20,
+				friend: [
+					{
+						name: "cate",
+						age: 19,
+					},
+					{
+						name: "lili",
+						age: 17,
+					},
+				],
+			},
+			{
+				name: "lisi",
+				age: 21,
+			},
+		],
+	};
+	// 使用 lodash 工具实现深拷贝
+	const o = _.cloneDeep(obj);
+	console.log(o);
+</script>
+```
+
+### JSON 实现
+
+```javascript
+const obj = {
+	name: "foo",
+	age: 18,
+	friend: [
+		{
+			name: "zhangsan",
+			age: 20,
+		},
+		{
+			name: "lisi",
+			age: 21,
+		},
+	],
+};
+// 1.将目标对象转为字符串
+const objJson = JSON.stringify(obj);
+// 2.将字符串解析为对象赋值给o
+const o = JSON.parse(objJson);
 console.log(o);
 ```

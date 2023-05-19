@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08_JSON实现深拷贝</title>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            name: 'foo',
+            age: 18,
+            friend: [
+                {
+                    name: 'zhangsan',
+                    age: 20,
+                },
+                {
+                    name: 'lisi',
+                    age: 21,
+                }
+            ]
+        }
+        // 1.将目标对象转为字符串
+        const objJson = JSON.stringify(obj);
+        // 2.将字符串解析为对象赋值给o
+        const o = JSON.parse(objJson);
+        console.log(o);
+    </script>
+</body>
+
+</html>
