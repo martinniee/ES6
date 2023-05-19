@@ -1546,3 +1546,40 @@ const objJson = JSON.stringify(obj);
 const o = JSON.parse(objJson);
 console.log(o);
 ```
+
+## 异常处理-throw-cty-catch-finally
+
+```html
+<p>123</p>
+<script>
+    function fn() {
+        try {
+            // 将可能出错的代码编写在 try...catch 的 try块中
+            const p = document.querySelector('.p');
+            p.style.color = 'red';
+        } catch (error) {
+            // throw new Error("")
+            // console.error(error.message);
+            //使用 throw 拦截是错误，并输出到控制台。默认 throw 不中断程序
+            throw new Error(error.message);
+            // 使用 return 中断程序
+            return;
+        }
+        finally {
+            // 无论程序执行对错，都会执行 finally语句
+            alert('弹出对话窗口');
+        }
+        console.log(111);
+    }
+    fn()
+</script>
+```
+
+
+
+总结：
+
+1. try..catch用于捕获错误信息
+2. 将预估可能发生错误的代码写在ty代码段中
+3. 如果try代码段中出现错误后，会执行catch代码段，并截获到错误信息
+4. finally不管是否有错误，都会执行
