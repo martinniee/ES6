@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04_递归函数</title>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            name: 'foo',
+            age: 18,
+            friend: [
+                {
+                    name: 'zhangsan',
+                    age: 20,
+                    friend: [
+                        {
+                            name: 'cate',
+                            age: 19,
+                        },
+                        {
+                            name: 'lili',
+                            age: 17,
+                        },
+                    ]
+                },
+                {
+                    name: 'lisi',
+                    age: 21,
+                }
+            ]
+        }
+        const o = {};
+        // 实现深拷贝
+        /*难点：此种递归只是某种形式的“迭代“。
+          因为赋值操作在”递“的过程中就完成了。而”归“只是语言调用栈后自然的退栈，退栈过程没有进行额外的处理
+          赋值操作的核心在于，给数组或对象添加一个属性或元素的语法 newObj[key] 会承接“上下文”引用，及 
+          假设此时的key为 friend, newObj[key] 表示 obj.friend，以此类推为 obj.friend.friend。只有这样才能为同一个对象赋值
+          因此在这个过程中因为此特性，newObj已经完成了赋值操作，“递”的过程中只是从 oldObj取值
+          因此无需“归”。
+         */
+        function deepCopy(newObj, oldObj) {
+            for (const key in oldObj) {
+                // 递归判断 {},或 []
+                // 1. 解决 []数组
+                if (oldObj[key] instanceof Array) {
+                    newObj[key] = [];
+                    deepCopy(newObj[key], oldObj[key]);
+
+                    // 2. 解决 {}对象
+                } else if (oldObj[key] instanceof Object) {
+                    newObj[key] = {};
+                    deepCopy(newObj[key], oldObj[key])
+                }
+                else {
+                    // 将 oldObj的key的value赋值给 newObj的同名的key
+                    newObj[key] = oldObj[key];
+                }
+            }
+        }
+        deepCopy(o, obj);
+        console.log(o);
+    </script>
+</body>
+
+</html>
