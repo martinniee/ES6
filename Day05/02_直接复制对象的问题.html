@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_直接复制对象的问题</title>
+</head>
+
+<body>
+    <script>
+        const obj = { name: 'foo', age: 18 }
+        const o = obj; // 赋值的地址
+        // 修改o的属性age
+        o.age = 20;
+        console.log(o.age); // 20
+        console.log(obj.age); //  20
+    </script>
+</body>
+
+</html>
