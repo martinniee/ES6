@@ -1374,3 +1374,8 @@ console.log(obj instanceof Object); // true
 console.log({} instanceof Object); // true
 ```
 
+## 综合案例
+
+代码：https://github.com/martinniee/ES6/blob/main/Day04/08_%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html
+
+效果：https://htmlpreview.github.io/?https://github.com/martinniee/ES6/blob/main/Day04/08_%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html
