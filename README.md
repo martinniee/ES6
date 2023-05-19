@@ -1626,4 +1626,31 @@ fn.call(obj, 1, 2);
 
 ### appy()
 
+使用apply方法调用函数，同时指定被调用函数中this的值
+
+语法：`fun.apply(function,thisArg,[argArray])`
+
+```javascript
+const obj = {
+    name: 'foo',
+    age: 18
+}
+function fn(x, y) {
+    // 默认调用函数 this 指向 window
+    console.log(this, x, y); // {name: 'foo', age: 18} 1 2
+    return x + y;
+}
+// apply(function,thisArg,[argArray])
+// apply的返回值就是调用 apply()函数的函数的返回值
+const res = fn.apply(obj, [1, 2]);
+console.log("res: ", res); // res:  3
+
+// apply的应用，因和数组有关，可求数组最大值
+const max = Math.max.apply(Math, [1, 2, 3]);
+console.log("max:", max); // max: 3
+```
+
+
+
 ### bind()
+
