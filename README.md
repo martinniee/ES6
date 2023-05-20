@@ -1703,3 +1703,52 @@ call，apply，bind总结
   - apply经常跟数组有关系。比如借助于数学对象实现数组最大值最小值
 
   - bind不调用函数，但是还想改变this指向。比如改变定时器内部的this指向
+
+
+
+## 性能优化
+
+### 防抖
+
+防抖（debounce）：单位时间内，频繁触发事件，**只执行最后一次**
+
+使用场景：搜索框搜索输入。**只需用户最后一次输入完**，再发送请求手机号、邮箱验证输入检测
+
+```javascript
+<body>
+    <div class="box"></div>
+    <script>
+
+        const box = document.querySelector('.box');
+        let i = 1;
+        function mouseMove() {
+            box.innerHTML = i++;
+        }
+        // -----------------实现防抖：使用 lodash-----------------
+        box.addEventListener('mousemove', _.debounce(mouseMove, 500))
+        // -----------------实现防抖：手写-----------------
+        /*
+        思路: 核心将执行（触发）的事件操作放置在 setTimeout 定时器中用于清除之前的操作（事件）
+        1. 生命定时器变量
+        2. 每次触发之前，判断变量中是否存在定时器，有则清除，没有则添加
+        3. 函数调用编写在定时器中
+        */
+        function debounce(fn, time) {
+            let timer;
+            // 技巧：使用闭包保存 timer上一次数据
+            return function () {
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(function () {
+                    fn(); // 要执行的操作的函数
+                }, time)
+            }
+        }
+        box.addEventListener('mousemove', debounce(mouseMove, 500))
+    </script>
+</body>
+```
+
+
+
+### 节流
+

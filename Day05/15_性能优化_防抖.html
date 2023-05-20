@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15_性能优化_防抖</title>
+    <script src="./lodash.js"></script>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            background-color: #ccc;
+            color: #fff;
+            text-align: center;
+            font-size: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+
+        const box = document.querySelector('.box');
+        let i = 1;
+        function mouseMove() {
+            box.innerHTML = i++;
+        }
+        // -----------------实现防抖：使用 lodash-----------------
+        box.addEventListener('mousemove', _.debounce(mouseMove, 500))
+        // -----------------实现防抖：手写-----------------
+        /*
+        思路: 核心将执行（触发）的事件操作放置在 setTimeout 定时器中用于清除之前的操作（事件）
+        1. 生命定时器变量
+        2. 每次触发之前，判断变量中是否存在定时器，有则清除，没有则添加
+        3. 函数调用编写在定时器中
+        */
+        function debounce(fn, time) {
+            let timer;
+            // 技巧：使用闭包保存 timer上一次数据
+            return function () {
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(function () {
+                    fn(); // 要执行的操作的函数
+                }, time)
+            }
+        }
+        box.addEventListener('mousemove', debounce(mouseMove, 500))
+    </script>
+</body>
+
+</html>
