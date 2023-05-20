@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13_apply</title>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            name: 'foo',
+            age: 18
+        }
+        function fn(x, y) {
+            // 默认调用函数 this 指向 window
+            console.log(this, x, y); // {name: 'foo', age: 18} 1 2
+            return x + y;
+        }
+        // apply(function,thisArg,[argArray])
+        // apply的返回值就是调用 apply()函数的函数的返回值
+        const res = fn.apply(obj, [1, 2]);
+        console.log("res: ", res); // res:  3
+
+        // apply的应用，因和数组有关，可求数组最大值
+        const max = Math.max.apply(Math, [1, 2, 3]);
+        console.log("max:", max); // max: 3
+    </script>
+</body>
+
+</html>

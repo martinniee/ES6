@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15_性能优化_防抖</title>
+    <script src="./lodash.js"></script>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            background-color: #ccc;
+            color: #fff;
+            text-align: center;
+            font-size: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+
+        const box = document.querySelector('.box');
+        let i = 1;
+        function mouseMove() {
+            box.innerHTML = i++;
+        }
+        // -----------------实现节流：使用 lodash-----------------
+        // box.addEventListener('mousemove', _.throttle(mouseMove, 500))
+        // -----------------实现节流：手写-----------------
+        /*
+        思路: 核心将执行（触发）的事件操作放置在 setTimeout 定时器中用于清除之前的操作（事件）
+        1. 声明定时器变量
+        2. 每次触发之前，判断变量中是否存在定时器，有则不开启新定时器，
+        ，没有则开启定时器存在 定时器变量中。将定时器中的定时器清理
+        3. 函数调用编写在定时器中
+        */
+        function throttle(fn, time) {
+            let timer = null;
+            return function () {
+                // 如果没有定时器，则开启
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn();
+                        // 开启前清空上一个定时器
+                        // 不能使用 clearTimeout ，因此在 setTimeout 中不能 清除 setTimeout
+                        timer = null;
+                    }, time);
+                }
+            }
+        }
+        box.addEventListener('mousemove', throttle(mouseMove, 500))
+    </script>
+</body>
+
+</html>

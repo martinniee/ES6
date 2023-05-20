@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_伪数组转为真数组</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        // 使用 querySelectorAll 的数组是伪数组
+        const lis = document.querySelectorAll('ul li');
+        console.log("lis: ", lis); // lis:  NodeList(3) [li, li, li]
+        // 尝试使用数组的 pop的方法删除某个元素
+        // lis.pop();// Uncaught TypeError: lis.pop is not a function
+
+        // 使用 Array.from() 可以将 伪数组 转为 真数组
+        const lis2 = Array.from(lis);
+        lis2.pop(); // 删除数组最后一个元素 
+        console.log("lis2: ", lis2); // lis2:  (2) [li, li]
+
+    </script>
+</body>
+
+</html>

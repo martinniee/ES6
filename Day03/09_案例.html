@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_案例</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        const spec = { size: '40cm*40cm', color: '黑色' };
+        // 1. 使用 values 获取对象的所有值的数组
+        const values = Object.values(spec);
+        // 2. 拼接数组使用 '/' 符号
+        const res = values.join('/');
+        console.log("res: ", res); // res:  40cm*40cm/黑色
+        document.querySelector('div').innerHTML = res;
+    </script>
+</body>
+
+</html>

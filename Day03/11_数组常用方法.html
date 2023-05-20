@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11_数组常用方法</title>
+</head>
+
+<body>
+    <script>
+        const str = 'foo,bar,baz,baba,papa';
+        // -----------------1. split() -----------------
+        // split() 方法使用指定的分隔符字符串将一个String对象分割成子字符串数组，以一个指定的分割字串来决定每个拆分的位置。
+        const arr = str.split(',');
+        console.log("arr: ", arr); // arr:  (5) ['foo', 'bar', 'baz', 'baba', 'papa']
+        // -----------------2. substring()-----------------
+        // substring() 方法返回一个字符串在开始索引到结束索引之间的一个子集，或从开始索引直到字符串的末尾的一个子集。
+        /*
+            1）substring(num) 默认截取从索引num开始往后的全部字符串
+            2）substring(num1,num2) 默认截取从索引num1到num2（不包括索引num2的元素）的字符串
+        */
+        const str2 = 'fast image cleaner plugin is awsome';
+        // 截取 str2 索引为5及其后： image cleaner plugin is awsome
+        console.log("截取 str2 索引为5及其后：", str2.substring(5));
+        // 截取 str2 索引为0到19： fast image cleaner 
+        console.log("截取 str2 索引为0到19：", str2.substring(0, 19));
+        // -----------------3. startsWith()-----------------
+        // startsWith() 方法用来判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false。
+        const str3 = 'hello everyone,welcome to here!';
+        console.log("判断 str3 是否以 hello 开头: ", str3.startsWith('hello')); // 判断 str3 是否以 hello 开头:  true
+        console.log("判断 str3 是否以 every 开头: ", str3.startsWith("every")); // 判断 str3 是否以 every 开头:  false
+        console.log("判断 str3 索引 15 开始及其后的字符串是否以 we 开头:", str3.startsWith("we", 15)); // 判断 str3 索引 15 开始及其后的字符串是否以 we 开头: true
+        // -----------------4. includes()-----------------
+        // includes() 方法执行区分大小写的搜索，以确定是否可以在另一个字符串中找到一个字符串，并根据情况返回 true 或 false。
+        console.log("判断 str3 是否包含 hello: ", str3.includes('hello')); //判断 str3 是否包含 hello:  true
+        console.log("判断 str3 是否包含 anyone: ", str3.includes('anyone')); // 判断 str3 是否包含 anyone:  false
+        console.log("判断 str3 索引 11 开始及其后的字符串是否包含 one: ", str3.includes('one', 11)); // 判断 str3 索引 11 开始及其后的字符串是否包含 one:  true
+    </script>
+</body>
+
+</html>

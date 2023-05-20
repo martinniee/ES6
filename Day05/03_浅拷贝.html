@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_浅拷贝</title>
+</head>
+
+<body>
+    <script>
+        const obj = {
+            name: 'foo',
+            age: 18,
+            family: {
+                baby: 'bar'
+            }
+        }
+        // 1. 解构对象：
+        /*  const o = { ...obj };
+         // 修改 o 的属性
+         o.age = 20;
+         console.log(o.age); // 20
+         console.log(obj.age); // 18 */
+        // ------------------------
+        // 3. 使用 Objec.assign()
+        const o = {};
+        Object.assign(o, obj);
+        o.age = 20;
+        console.log(o.age);
+        console.log(obj.age); // 18 */
+    </script>
+</body>
+
+</html>

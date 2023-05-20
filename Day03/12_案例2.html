@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12_案例</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 需求：将使用指定字符分隔的字符串中的被分隔的字符串提取出来，按照指定格式渲染到页面中
+        // 目标字符串，使用 ',' 分隔
+        const str = 'JavaScript-ES5,JavaScript-ES6';
+        // 处理到的目标字符串
+        const res = str.split(',').map(item => `<span>【JS】${item}</span><br>`).join('');
+        // 渲染到页面
+        document.querySelector('div').innerHTML = res;
+    </script>
+</body>
+
+</html>

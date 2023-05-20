@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08_综合案例</title>
+    <style>
+        .modal {
+            width: 300px;
+            min-height: 100px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            position: fixed;
+            z-index: 999;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            background-color: #fff;
+        }
+
+        .modal .header {
+            line-height: 40px;
+            padding: 0 10px;
+            position: relative;
+            font-size: 20px;
+        }
+
+        .modal .header i {
+            font-style: normal;
+            color: #999;
+            position: absolute;
+            right: 15px;
+            top: -2px;
+            cursor: pointer;
+        }
+
+        .modal .body {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .modal .footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+        }
+
+        .modal .footer a {
+            padding: 3px 8px;
+            background: #ccc;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 2px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .modal .footer a.submit {
+            background-color: #369;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="delete">删除</button>
+    <button id="register">注册</button>
+    <script>
+        /*
+         分析：ES6中的继承机制：构造函数主要用于创建对象，原型用于储存公共的数据或方法
+        */
+        //  1.定义创建模态框的构造函数
+        function Modal(title = '', message = '') {
+            // 创建div标签
+            this.modalBox = document.createElement('div');
+            this.modalBox.className = 'modal';
+            this.modalBox.innerHTML = `
+            <div class='header'>${title}<i>x</i></div>
+            <div class='body'>${message}</div>
+            `
+            console.log(this.modalBox);
+        }
+        const del = new Modal('温馨提示', '你没有权限操作');
+        const register = new Modal('友情提示', '请注册账号');
+        //  2.挂载 open,close方法到构造函数的原型
+        Modal.prototype.open = function () {
+            document.body.append(this.modalBox); // 元素存在
+            // 需要注意的是：close 按钮是在执行 open()方法后渲染到DOM中的，因此绑定事件需要在元素存在之后
+            document.querySelector('i').addEventListener('click', () => {
+                this.close();
+            })
+        }
+        Modal.prototype.close = function () {
+            console.log("@@@@@@@@@@");
+            this.modalBox.remove();
+        }
+        // 注册删除事件
+        document.querySelector('#delete').addEventListener('click', () => {
+            del.open();
+        })
+        // 注册注册事件
+        document.querySelector('#register').addEventListener('click', () => {
+            register.open();
+        })
+    </script>
+</body>
+
+</html>
