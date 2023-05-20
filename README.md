@@ -1840,6 +1840,6 @@ call，apply，bind 总结
 </body>
 ```
 
-代码：<https://github.com/martinniee/ES6/blob/main/Day04/18_%E8%8A%82%E6%B5%81%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html>
+代码：<https://github.com/martinniee/ES6/blob/main/Day05/18_%E8%8A%82%E6%B5%81%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html>
 
-效果：<https://htmlpreview.github.io/?https://github.com/martinniee/ES6/blob/main/Day04/18_%E8%8A%82%E6%B5%81%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html>
+效果：<https://htmlpreview.github.io/?https://github.com/martinniee/ES6/blob/main/Day05/18_%E8%8A%82%E6%B5%81%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html>
