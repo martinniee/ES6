@@ -1752,3 +1752,64 @@ call，apply，bind总结
 
 ### 节流
 
+节流：单位时间内，频繁触发事件，**只执行一次**
+
+```html
+<body>
+    <div class="box"></div>
+    <script>
+
+        const box = document.querySelector('.box');
+        let i = 1;
+        function mouseMove() {
+            box.innerHTML = i++;
+        }
+        // -----------------实现节流：使用 lodash-----------------
+        // box.addEventListener('mousemove', _.throttle(mouseMove, 500))
+        // -----------------实现节流：手写-----------------
+        /*
+        思路: 核心将执行（触发）的事件操作放置在 setTimeout 定时器中用于清除之前的操作（事件）
+        1. 声明定时器变量
+        2. 每次触发之前，判断变量中是否存在定时器，有则不开启新定时器，
+        ，没有则开启定时器存在 定时器变量中。将定时器中的定时器清理
+        3. 函数调用编写在定时器中
+        */
+        function throttle(fn, time) {
+            let timer = null;
+            return function () {
+                // 如果没有定时器，则开启
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn();
+                        // 开启前清空上一个定时器
+                        // 不能使用 clearTimeout ，因此在 setTimeout 中不能 清除 setTimeout
+                        timer = null;
+                    }, time);
+                }
+            }
+        }
+        box.addEventListener('mousemove', throttle(mouseMove, 500))
+    </script>
+</body>
+```
+
+
+
+总结防抖和节流
+
+- 防抖：“半途而废”
+- 节流：“从始至终”
+
+| 性能优化 | 说明                                         | 使用场景                                                     |
+| -------- | -------------------------------------------- | ------------------------------------------------------------ |
+| 防抖     | 单位时间内，频繁触发事件，**只执行最后一次** | 搜索框搜索输入、手机号、邮箱验证输入检测                     |
+| 节流     | 单位时间内，频繁触发事件，**只执行一次**     | 高频事件：鼠标移动mousemove、页面尺寸缩放resize、<br/>滚动条滚动scroll等等 |
+
+![image-20230520135138188](assets/README-images/image-20230520135138188.png)
+
+
+
+
+
+
+
