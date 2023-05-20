@@ -1811,5 +1811,52 @@ call，apply，bind总结
 
 
 
+## 综合案例
 
+页面打开，可以记录上一次的视频播放位置
 
+思路：
+
+1. 在`ontimeupdate`事件触发的时候，每隔1秒钟，就记录当前时间到本地存储
+
+2. 下次打开页面，`onloadeddata`事件触发，就可以从本地存储取出时间，让视频从取出的时间播放，如果没有就默认为`0`
+
+3. 获得当前时间`video.currentTime`
+
+为了说明问题，假设将事件触发和回调执行的间隔设置为`3s`。则使用 防抖和节流的区别：
+
+![image-20230520164538405](assets/README-images/image-20230520164538405.png)
+
+防抖只有最后一次是事件触发执行回调，而节流每次事件触发都会执行回调（符合要求）
+
+```html
+<body>
+    <div class="video">
+        <video src="https://v.itheima.net/LapADhV6.mp4" controls></video>
+    </div>
+    <div class="elevetor">
+        <a href="javascript:;" data-ref="video">视频介绍</a>
+        <a href="javascript:;" data-ref="intro">课程介绍</a>
+        <a href="javascript:;" data-ref="outline">评论列表</a>
+    </div>
+    <script>
+        const video = document.querySelector('video');
+        // 1. 当页面播放，则将当前播放时间储存到 localStorage
+        video.ontimeupdate = _.throttle(() => {
+            console.log("触发了");
+            localStorage.setItem('currentTime', video.currentTime);
+
+        }, 1000)
+        // 2. 当页面关闭后，再次打开，取出 currentTime 播放
+        video.onloadeddata = () => {
+            video.currentTime = localStorage.getItem('currentTime') || 0;
+        }
+
+    </script>
+
+</body>
+```
+
+代码：<https://github.com/martinniee/ES6/blob/main/Day04/18_%E8%8A%82%E6%B5%81%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html>
+
+效果：<https://htmlpreview.github.io/?https://github.com/martinniee/ES6/blob/main/Day04/18_%E8%8A%82%E6%B5%81%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B.html>
