@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14_bind</title>
+</head>
+
+<body>
+    <button>按钮</button>
+    <script>
+        const obj = {
+            name: 'foo',
+            age: 18
+        }
+        function fn() {
+            console.log(this);
+        }
+        // bind() 不会调用函数
+        // fun.bind(obj) 后的 返回值是一个 修改过 this 为 obj 的 fun
+        const fun = fn.bind(obj);
+        console.log("fun:", fun);
+
+        // 需求：点击按钮禁用，2秒后启用
+        document.querySelector('button').addEventListener('click', function () {
+            // 禁用
+            this.disabled = true;
+            // 启用
+            // 如果使用 function 则 setTimeout中 this 为 window。
+            setTimeout(function () {
+                // this 由 window 变为 btn
+                this.disabled = false;
+                // 需要修改为 btn,因此需要修改函数中 this 指向，使用 bind()修改
+            }.bind(this), 2000);
+        })
+    </script>
+</body>
+
+</html>

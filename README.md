@@ -1654,3 +1654,52 @@ console.log("max:", max); // max: 3
 
 ### bind()
 
+`bind{}`方法**不会**调用函数。但是能改变函数内部this指向
+
+语法：`bind(thisArg,arg1,arg2,...)`
+
+```html
+<button>按钮</button>
+<script>
+    const obj = {
+        name: 'foo',
+        age: 18
+    }
+    function fn() {
+        console.log(this);
+    }
+    // bind() 不会调用函数
+    // fun.bind(obj) 后的 返回值是一个 修改过 this 为 obj 的 fun
+    const fun = fn.bind(obj);
+    console.log("fun:", fun);
+
+    // 需求：点击按钮禁用，2秒后启用
+    document.querySelector('button').addEventListener('click', function () {
+        // 禁用
+        this.disabled = true;
+        // 启用
+        // 如果使用 function 则 setTimeout中 this 为 window。
+        setTimeout(function () {
+            // this 由 window 变为 btn
+            this.disabled = false;
+        // 需要修改为 btn,因此需要修改函数中 this 指向，使用 bind()修改
+        }.bind(this), 2000);
+    })
+</script>
+```
+
+call，apply，bind总结
+
+- 相同点：都可以**改变函数内部的this指向**。
+- 区别点：
+  - call和apply会调用函数，并且改变函数内部this指向。
+  - call和apply传递的参数不一样，call传递参数`arg1,arg2,..`形式； apply必须**数组**形式`[argArray]`
+  - **bind不会调用函数**，可以改变函数内部this指向。
+
+- 主要应用场景：
+
+  - call调用函数并且可以传递参数
+
+  - apply经常跟数组有关系。比如借助于数学对象实现数组最大值最小值
+
+  - bind不调用函数，但是还想改变this指向。比如改变定时器内部的this指向
